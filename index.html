@@ -5,7 +5,297 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Limevate KI-Akademie</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css" />
-  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+/* ============================================================
+   Limevate KI-Akademie – Stylesheet
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:      #1D9E75;
+  --green-light:#E1F5EE;
+  --green-dark: #0F6E56;
+  --green-deep: #085041;
+  --blue-light: #E6F1FB;
+  --blue:       #378ADD;
+  --blue-dark:  #185FA5;
+  --amber-light:#FAEEDA;
+  --amber:      #EF9F27;
+  --amber-dark: #854F0B;
+  --red-light:  #FCEBEB;
+  --red:        #E24B4A;
+  --red-dark:   #A32D2D;
+  --purple-light:#EEEDFE;
+  --purple-dark: #3C3489;
+  --teal-light: #E1F5EE;
+  --teal-dark:  #085041;
+
+  --bg:         #ffffff;
+  --bg2:        #f7f7f5;
+  --bg3:        #f0eeea;
+  --border:     rgba(0,0,0,0.1);
+  --border2:    rgba(0,0,0,0.18);
+  --text:       #1a1a1a;
+  --text2:      #555;
+  --text3:      #888;
+  --radius:     8px;
+  --radius-lg:  12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:    #1a1a1a;
+    --bg2:   #242424;
+    --bg3:   #2e2e2e;
+    --border:  rgba(255,255,255,0.1);
+    --border2: rgba(255,255,255,0.18);
+    --text:  #f0f0f0;
+    --text2: #aaa;
+    --text3: #666;
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg3);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+/* Header */
+.hdr { display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; }
+.hdr-logo {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 14px; flex-shrink: 0;
+}
+.hdr h1 { font-size: 19px; font-weight: 600; color: var(--text); }
+.hdr p  { font-size: 12px; color: var(--text3); }
+
+/* Tabs */
+.tabs {
+  display: flex; border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem; overflow-x: auto;
+}
+.tab {
+  padding: 8px 14px; font-size: 13px; cursor: pointer;
+  border: none; background: transparent; color: var(--text2);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  white-space: nowrap; flex-shrink: 0; display: flex; align-items: center; gap: 5px;
+}
+.tab.active { color: var(--green); border-bottom-color: var(--green); font-weight: 600; }
+.tab:hover:not(.active) { color: var(--text); }
+
+/* Views */
+.view { display: none; }
+.view.active { display: block; }
+
+/* Section label */
+.slbl {
+  font-size: 11px; font-weight: 600; color: var(--text3);
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: .75rem;
+}
+
+/* Profiles */
+.profiles { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1rem; }
+.pc {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: .875rem; cursor: pointer;
+  transition: border-color .15s;
+}
+.pc:hover { border-color: var(--border2); }
+.pc.sel { border: 2px solid var(--green); }
+.av {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 13px; margin-bottom: 8px;
+}
+.avg { background: var(--green-light); color: var(--green-dark); }
+.avb { background: var(--blue-light); color: var(--blue-dark); }
+.ava { background: var(--amber-light); color: var(--amber-dark); }
+.pn { font-size: 13px; font-weight: 600; color: var(--text); }
+.pr { font-size: 11px; color: var(--text3); margin: 2px 0 6px; }
+.pbar { height: 3px; background: var(--bg3); border-radius: 2px; margin-top: 7px; }
+.pfg { height: 3px; border-radius: 2px; background: var(--green); }
+.pfb { height: 3px; border-radius: 2px; background: var(--blue); }
+.pfa { height: 3px; border-radius: 2px; background: var(--amber); }
+
+/* Badges */
+.badge {
+  display: inline-block; font-size: 11px; padding: 2px 8px;
+  border-radius: 20px; font-weight: 600;
+}
+.bg  { background: var(--green-light); color: var(--green-dark); }
+.bb  { background: var(--blue-light); color: var(--blue-dark); }
+.ba  { background: var(--amber-light); color: var(--amber-dark); }
+.br  { background: var(--red-light); color: var(--red-dark); }
+.bpu { background: var(--purple-light); color: var(--purple-dark); }
+.bte { background: var(--teal-light); color: var(--teal-dark); }
+
+/* Modules */
+.mlist { display: flex; flex-direction: column; gap: 8px; }
+.mitem { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.mhdr { display: flex; align-items: center; gap: 10px; padding: .8rem 1rem; cursor: pointer; }
+.mhdr:hover { background: var(--bg2); }
+.micon { font-size: 18px; width: 24px; flex-shrink: 0; color: var(--text3); }
+.mtitle { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; }
+.mmeta { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+.mtime { font-size: 11px; color: var(--text3); }
+.mchev { font-size: 16px; color: var(--text3); transition: transform .2s; flex-shrink: 0; }
+.mchev.open { transform: rotate(180deg); }
+.mbody { display: none; border-top: 1px solid var(--border); padding: 1rem; }
+.mbody.open { display: block; }
+
+/* Lesson nav */
+.lnav { display: flex; gap: 6px; margin-bottom: 1rem; flex-wrap: wrap; }
+.lb {
+  font-size: 12px; padding: 5px 11px;
+  border: 1px solid var(--border); border-radius: 20px;
+  background: transparent; cursor: pointer; color: var(--text2);
+  transition: all .15s;
+}
+.lb:hover { border-color: var(--border2); color: var(--text); }
+.lb.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* Lesson content */
+.lc { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.lt {
+  font-size: 13px; font-weight: 600; color: var(--text);
+  margin: .875rem 0 .4rem; display: flex; align-items: center; gap: 6px;
+}
+.lt:first-child { margin-top: 0; }
+.callout {
+  background: var(--bg2); border-left: 3px solid var(--green);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: .7rem 1rem; margin: .6rem 0;
+  font-size: 13px; color: var(--text); line-height: 1.6;
+}
+.callout strong { font-weight: 600; }
+.warn-box {
+  background: var(--amber-light); border-left: 3px solid var(--amber);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: .7rem 1rem; margin: .6rem 0;
+  font-size: 13px; color: #412402; line-height: 1.6;
+}
+.ex {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: .7rem 1rem;
+  margin: .5rem 0; font-size: 13px; line-height: 1.6; color: var(--text);
+}
+.ex .el {
+  font-size: 11px; font-weight: 600; color: var(--text3);
+  margin-bottom: 3px; text-transform: uppercase; letter-spacing: .05em;
+}
+.tcol { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: .5rem 0; }
+.ic { background: var(--bg2); border-radius: var(--radius); padding: .7rem; font-size: 13px; }
+.ic strong { display: block; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.ic span { color: var(--text2); line-height: 1.5; font-size: 12px; }
+.steps { list-style: none; display: flex; flex-direction: column; gap: 5px; margin: .5rem 0; }
+.steps li { display: flex; gap: 9px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+.snum {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  font-size: 10px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.snum.warn { background: var(--amber); }
+
+/* Quiz */
+.qwrap { display: flex; flex-direction: column; gap: 8px; }
+.qcard { background: var(--bg2); border-radius: var(--radius-lg); padding: .875rem; }
+.qtext { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: .625rem; line-height: 1.5; }
+.qopts { display: flex; flex-direction: column; gap: 5px; }
+.qopt {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 8px 12px;
+  font-size: 13px; color: var(--text); cursor: pointer; text-align: left;
+  transition: border-color .15s;
+}
+.qopt:hover { border-color: var(--border2); }
+.qopt.ok { background: var(--green-light); border-color: var(--green); color: var(--green-deep); }
+.qopt.no { background: var(--red-light); border-color: var(--red-dark); color: var(--red-dark); }
+.qfb { display: none; font-size: 12px; margin-top: 7px; padding: 7px 10px; border-radius: var(--radius); line-height: 1.5; }
+.qfb.show { display: block; }
+.qfb.ok { background: var(--green-light); color: var(--green-deep); }
+.qfb.no { background: var(--red-light); color: var(--red-dark); }
+
+/* Tools */
+.tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+.tool-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: .875rem; }
+.tool-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.tool-desc { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 6px; }
+.tool-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+
+/* Law */
+.lcard { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 8px; }
+.lchdr { display: flex; align-items: center; gap: 10px; padding: .8rem 1rem; cursor: pointer; }
+.lchdr:hover { background: var(--bg2); }
+.lchdr-title { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; }
+.lchev { font-size: 16px; color: var(--text3); transition: transform .2s; }
+.lcbody { display: none; border-top: 1px solid var(--border); padding: 1rem; }
+.lcbody.open { display: block; }
+.li { display: flex; gap: 8px; padding: 5px 0; font-size: 13px; color: var(--text2); line-height: 1.6; border-bottom: 1px solid var(--border); }
+.li:last-child { border-bottom: none; }
+.li i { color: var(--green); font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+.lw { display: flex; gap: 8px; padding: 5px 0; font-size: 13px; color: #6b3a00; line-height: 1.6; }
+.lw i { color: var(--amber); font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+.lb-title { font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin: 10px 0 5px; }
+.lb-title:first-child { margin-top: 0; }
+
+/* Buttons */
+.cta {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--green); color: #fff; border: none;
+  border-radius: var(--radius); padding: 9px 14px;
+  font-size: 13px; cursor: pointer; width: 100%;
+  font-weight: 600; transition: opacity .15s;
+}
+.cta:hover { opacity: .88; }
+.cta2 {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg2); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 9px 14px; font-size: 13px; cursor: pointer; width: 100%;
+  transition: background .15s;
+}
+.cta2:hover { background: var(--bg3); }
+.row { display: flex; gap: 8px; }
+.mt-1 { margin-top: .75rem; }
+
+/* Profile detail box */
+.prof-box {
+  background: var(--bg2); border-radius: var(--radius-lg);
+  padding: 1rem; margin-top: .5rem;
+}
+.prof-box-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+.prof-box-text { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: .75rem; }
+.next-step { display: flex; gap: 8px; font-size: 13px; color: var(--text); padding: 3px 0; align-items: flex-start; }
+.next-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  font-size: 10px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .profiles { grid-template-columns: 1fr; }
+  .tcol { grid-template-columns: 1fr; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .row { flex-direction: column; }
+}
+  </style>
 </head>
 <body>
   <div class="app">
@@ -25,7 +315,6 @@
       <button class="tab" onclick="switchTab('quiz',this)"><i class="ti ti-bulb"></i> Quiz</button>
     </div>
 
-    <!-- TEAM -->
     <div id="tab-team" class="view active">
       <div class="slbl">Wähle dein Profil</div>
       <div class="profiles">
@@ -62,19 +351,16 @@
       </div>
     </div>
 
-    <!-- MODULE -->
     <div id="tab-learn" class="view">
       <div class="slbl">Alle Lernmodule — klicke zum Öffnen</div>
       <div class="mlist" id="mlist"></div>
     </div>
 
-    <!-- KI-TOOLS -->
     <div id="tab-tools" class="view">
       <div class="slbl">KI-Tools — was ihr kennen und empfehlen müsst</div>
       <div id="tools-content"></div>
     </div>
 
-    <!-- RECHT -->
     <div id="tab-law" class="view">
       <div class="slbl">Rechtsgrundlagen — Pflichtlektüre für KI-Berater in Deutschland</div>
       <div id="law-content"></div>
@@ -83,7 +369,6 @@
       </button>
     </div>
 
-    <!-- QUIZ -->
     <div id="tab-quiz" class="view">
       <div class="slbl">Wissenstest</div>
       <div style="display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap" id="quiz-filters">
@@ -106,7 +391,720 @@
     </div>
   </div>
 
-  <script src="src/data.js"></script>
-  <script src="src/app.js"></script>
+  <script>
+/* ============================================================
+   Limevate KI-Akademie – Data
+   ============================================================ */
+
+const profiles = {
+  josh: {
+    name: "Josh – Digitalisierungsmanager (BZKI)",
+    focus: "Du lernst 4h/Tag und bist bereits fortgeschritten. Dein Fokus: KI-Strategie, Change Management, EU AI Act als Vertriebsargument und die Limevate-Angebote schärfen. Vertiefte Prompt-Techniken und KI-Agenten sind dein nächster Level.",
+    next: [
+      "EU AI Act Kompetenzpflicht (seit Aug 2025) als Verkaufsargument nutzen",
+      "Eigene Prompt-Bibliothek für Limevate aufbauen",
+      "Erstes Kundenangebot ausarbeiten und kalkulieren"
+    ]
+  },
+  marv: {
+    name: "Marv – KI-Kompetenz zertifiziert",
+    focus: "Solide Grundlage vorhanden. Jetzt: Tiefe in Automatisierung und KI-Agenten. Du kannst die technische Umsetzung für Kunden übernehmen – das ist euer Wettbewerbsvorteil gegenüber reinen Beratern.",
+    next: [
+      "KI-Agenten & n8n/Make Automatisierungsworkflows",
+      "RAG-Systeme (Wissensdatenbanken) verstehen",
+      "DSGVO-konformen KI-Einsatz beim Kunden sicher beraten"
+    ]
+  },
+  cc: {
+    name: "Co-Chef – frischer Start",
+    focus: "Keine Vorkenntnisse ist ein Vorteil: Du siehst KI mit Kundenaugen. Starte mit Grundlagen, dann direkt Praxis. Drei Wochen intensive Nutzung bringen dich auf Mittelstufe.",
+    next: [
+      "Modul 1 & 2 komplett durcharbeiten",
+      "ChatGPT, Claude und Perplexity je eine Woche täglich nutzen",
+      "Ersten eigenen Prompt für eine echte Aufgabe schreiben"
+    ]
+  }
+};
+
+const modules = [
+  {
+    id: 'm1', icon: 'ti-bulb', title: 'Modul 1 – KI-Grundlagen',
+    badge: 'Einsteiger', bc: 'ba', time: '45 Min',
+    lessons: ['Was ist KI?', 'Machine Learning & Deep Learning', 'LLMs – wie funktioniert das?', 'KI-Grenzen & Risiken', 'Mini-Quiz'],
+    content: [
+      `<div class="lt"><i class="ti ti-bulb"></i>Was ist Künstliche Intelligenz?</div>
+       <div class="lc">KI ist ein Oberbegriff für Systeme, die Aufgaben ausführen, die normalerweise menschliche Intelligenz erfordern – Texte verstehen, Muster erkennen, Entscheidungen treffen.</div>
+       <div class="callout"><strong>Kern-Verständnis:</strong> KI "denkt" nicht wie ein Mensch. Sie erkennt statistische Muster in Daten und wendet diese auf neue Situationen an.</div>
+       <div class="lt">Die drei Ebenen der KI</div>
+       <div class="tcol">
+         <div class="ic"><strong>Schwache KI (heute)</strong><span>Kann eine spezifische Aufgabe sehr gut. Alle heutigen Systeme (ChatGPT, Claude, Bildgeneratoren) sind schwache KI.</span></div>
+         <div class="ic"><strong>Starke KI / AGI</strong><span>Kann jede intellektuelle Aufgabe wie ein Mensch. Nicht erreicht, aber in 5–10 Jahren möglicherweise.</span></div>
+       </div>
+       <div class="lt">Anwendungsfelder heute</div>
+       <ul class="steps">
+         <li><span class="snum">1</span>Sprachverarbeitung: Übersetzer, Chatbots, Texterstellung, Protokolle</li>
+         <li><span class="snum">2</span>Bildverarbeitung: Gesichtserkennung, medizinische Diagnose, Qualitätskontrolle</li>
+         <li><span class="snum">3</span>Empfehlungssysteme: Netflix, Spotify, Amazon, LinkedIn</li>
+         <li><span class="snum">4</span>Automatisierung: Buchhaltung, Kundenservice, Dokumentenverarbeitung</li>
+         <li><span class="snum">5</span>Vorhersagemodelle: Absatzprognosen, Wartungsbedarf, Kreditrisiko</li>
+       </ul>
+       <div class="callout"><strong>Für Limevate:</strong> Euer Job ist nicht, KI zu bauen – sondern Unternehmen zu helfen, KI sinnvoll einzusetzen. Deshalb müsst ihr Potenziale UND Grenzen kennen und erklären können.</div>`,
+
+      `<div class="lt"><i class="ti ti-cpu"></i>Machine Learning</div>
+       <div class="lc">ML ist ein Teilbereich der KI: Statt explizit programmiert zu werden, lernt das System aus Daten. Der Entwickler gibt nicht mehr alle Regeln vor – das System leitet sie selbst ab.</div>
+       <div class="ex"><div class="el">Analogie</div>Statt Spam-Regeln zu programmieren ("enthält GRATIS → Spam"), zeigt man dem System 1 Million Spam- und Ham-Mails. Es findet selbst die Muster.</div>
+       <div class="lt">ML-Lernarten</div>
+       <div class="tcol">
+         <div class="ic"><strong>Supervised Learning</strong><span>Lernen mit beschrifteten Daten. Eingabe + richtige Antwort → Modell lernt den Zusammenhang. Beispiel: Bildklassifikation, Preisvorhersage.</span></div>
+         <div class="ic"><strong>Unsupervised Learning</strong><span>Lernen ohne Beschriftung. Modell findet Gruppen/Muster selbst. Beispiel: Kundensegmentierung.</span></div>
+         <div class="ic"><strong>Reinforcement Learning</strong><span>Lernen durch Belohnung/Strafe. Agent interagiert mit Umgebung. Beispiel: Spielstrategien, Robotik.</span></div>
+         <div class="ic"><strong>Deep Learning</strong><span>Vielschichtige neuronale Netze, inspiriert vom Gehirn. Basis für Sprache, Bilder, LLMs. Braucht viel Daten und Rechenleistung.</span></div>
+       </div>
+       <div class="callout"><strong>Praxistipp:</strong> Als KI-Berater müsst ihr das nicht programmieren – aber ihr müsst erklären, welche Methode für welches Kundenproblem passt und warum.</div>`,
+
+      `<div class="lt"><i class="ti ti-message-chatbot"></i>Wie funktionieren LLMs?</div>
+       <div class="lc">Large Language Models wie GPT-4 oder Claude werden auf Milliarden Texten trainiert. Sie lernen die statistische Verteilung von Wörtern – welches Token folgt mit welcher Wahrscheinlichkeit auf welches andere.</div>
+       <div class="ex"><div class="el">Vereinfacht</div>"Die Hauptstadt von Deutschland ist ___" → Das Modell hat diese Phrase so oft mit "Berlin" danach gesehen, dass es das mit hoher Wahrscheinlichkeit vorhersagt.</div>
+       <div class="lt">Schlüsselbegriffe</div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>Token:</strong> Textstück (~¾ Wort). 1.000 Wörter ≈ 1.300 Token. Modelle denken in Token, nicht Wörtern.</li>
+         <li><span class="snum">2</span><strong>Transformer-Architektur:</strong> Ermöglicht, Kontext über lange Texte hinweg zu behalten. Basis fast aller modernen LLMs seit 2017.</li>
+         <li><span class="snum">3</span><strong>Temperatur:</strong> Steuert Kreativität. 0 = deterministisch/präzise. 1+ = kreativ/variabel.</li>
+         <li><span class="snum">4</span><strong>Kontextfenster:</strong> Wie viel Text das Modell gleichzeitig "sieht". Claude: bis 200.000 Token. GPT-4: 128.000.</li>
+         <li><span class="snum">5</span><strong>RLHF:</strong> Reinforcement Learning from Human Feedback – so werden Modelle "nett" und hilfreich gemacht.</li>
+       </ul>
+       <div class="tcol">
+         <div class="ic"><strong>Claude (Anthropic)</strong><span>Stark in Analyse, Recht und langen Dokumenten. Empfehlung für Beratungsaufgaben.</span></div>
+         <div class="ic"><strong>GPT-4o (OpenAI)</strong><span>Multimodal, breite Basis. Stark in Coding und Kreativaufgaben.</span></div>
+         <div class="ic"><strong>Gemini (Google)</strong><span>Gut in Google Workspace integriert. Stark bei Recherche.</span></div>
+         <div class="ic"><strong>Llama 3 (Meta)</strong><span>Open Source. Kann lokal betrieben werden – wichtig für Datenschutz.</span></div>
+       </div>`,
+
+      `<div class="lt"><i class="ti ti-alert-triangle"></i>KI-Grenzen & Risiken</div>
+       <div class="lc">Gute Berater kennen nicht nur Stärken, sondern auch Schwächen. Das schafft Vertrauen bei Kunden.</div>
+       <div class="warn-box"><strong>Halluzination:</strong> LLMs erfinden manchmal Fakten, weil sie auf Wahrscheinlichkeit basieren, nicht auf Wissen. Besonders gefährlich bei Rechtsfragen, Zahlen, Quellen.</div>
+       <div class="lt">Weitere Grenzen</div>
+       <ul class="steps">
+         <li><span class="snum warn">!</span><strong>Wissensstichtag:</strong> Modelle werden einmalig trainiert. Aktuelles Wissen fehlt ohne Web-Suche.</li>
+         <li><span class="snum warn">!</span><strong>Kein echtes Verstehen:</strong> KI versteht keine Bedeutung – sie erkennt Muster. Kontext kann verloren gehen.</li>
+         <li><span class="snum warn">!</span><strong>Bias:</strong> Trainingsdaten enthalten gesellschaftliche Verzerrungen, die Modelle übernehmen können.</li>
+         <li><span class="snum warn">!</span><strong>Datenschutz:</strong> Eingaben können zu Trainingszwecken genutzt werden (bei kostenlosen Versionen).</li>
+         <li><span class="snum warn">!</span><strong>Keine Garantie:</strong> KI-Outputs müssen immer von Menschen geprüft werden. Blind vertrauen ist gefährlich.</li>
+       </ul>
+       <div class="callout"><strong>Limevate-Vorteil:</strong> Wer Kunden über Risiken aufklärt, baut nachhaltig Vertrauen auf. Das unterscheidet euch von reinen "KI-Hype-Verkäufern".</div>`,
+      null
+    ],
+    quiz: [
+      { q: "Was ist der Hauptunterschied zwischen KI und traditioneller Programmierung?", opts: ["KI ist immer schneller", "KI lernt Regeln aus Daten, statt explizit programmiert zu werden", "KI braucht kein Internet", "KI kann keine Fehler machen"], c: 1, e: "Traditionell: Regeln werden programmiert. ML: Regeln werden aus Daten gelernt." },
+      { q: "Was bedeutet 'Halluzination' bei einem LLM?", opts: ["Das Modell ist überlastet", "Das Modell generiert plausibel klingende, aber falsche Informationen", "Das Modell antwortet auf Englisch", "Das Modell ist zu kreativ"], c: 1, e: "LLMs basieren auf Wahrscheinlichkeit. Sie können selbstsicher falsche Fakten produzieren. Immer prüfen!" },
+      { q: "Was ist ein 'Kontextfenster' bei einem LLM?", opts: ["Das Einstellungsmenü", "Die Menge Text, die das Modell gleichzeitig verarbeiten kann", "Die Trainingszeit", "Die Benutzeroberfläche"], c: 1, e: "Je größer das Kontextfenster, desto längere Dokumente kann das Modell gleichzeitig analysieren." }
+    ]
+  },
+  {
+    id: 'm2', icon: 'ti-prompt', title: 'Modul 2 – Prompt Engineering',
+    badge: 'Mittelstufe', bc: 'bb', time: '60 Min',
+    lessons: ['Warum Prompts wichtig sind', 'Die 5 Grundprinzipien', 'Fortgeschrittene Techniken', 'Prompt-Bibliothek aufbauen', 'Mini-Quiz'],
+    content: [
+      `<div class="lt"><i class="ti ti-prompt"></i>Derselbe Stoff – komplett andere Antwort</div>
+       <div class="lc">Dasselbe Modell liefert bei unterschiedlichen Prompts dramatisch verschiedene Qualitäten. Prompt Engineering ist die Fähigkeit, diese Qualität systematisch zu steigern.</div>
+       <div class="ex"><div class="el">Schlechter Prompt</div>"Schreib mir einen Text über KI."</div>
+       <div class="ex"><div class="el">Professioneller Prompt</div>"Du bist erfahrener KI-Berater mit Fokus auf Mittelstand. Schreibe einen 300-Wörter-Einführungstext über den praktischen Nutzen von KI für Handwerksbetriebe in Deutschland. Ton: professionell aber verständlich. Keine Fachbegriffe ohne Erklärung. Zielgruppe: Handwerksmeister, 40–60 Jahre."</div>
+       <div class="callout"><strong>Für Limevate:</strong> Gutes Prompt Engineering ist euer Kernprodukt. Wer das systematisch beherrscht, liefert dauerhaft bessere Ergebnisse als Konkurrenten, die "einfach fragen".</div>`,
+
+      `<div class="lt"><i class="ti ti-list-check"></i>Die 5 Grundprinzipien</div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>Rolle zuweisen:</strong> "Du bist ein erfahrener Steuerberater..." gibt dem Modell Kontext, Tonalität und Expertise-Level vor.</li>
+         <li><span class="snum">2</span><strong>Aufgabe präzise definieren:</strong> Was genau soll gemacht werden? Verb + Objekt + Zweck.</li>
+         <li><span class="snum">3</span><strong>Format vorgeben:</strong> "Antworte als Tabelle / Stichpunkte / max. 200 Wörter / JSON / Markdown".</li>
+         <li><span class="snum">4</span><strong>Kontext liefern:</strong> Branche, Zielgruppe, Tonalität, was soll NICHT enthalten sein.</li>
+         <li><span class="snum">5</span><strong>Beispiele geben (Few-Shot):</strong> 2–3 Beispiele wie Input → Output aussehen soll.</li>
+       </ul>
+       <div class="ex"><div class="el">Limevate-Beispiel: Kundenangebot</div>"Du bist Vertriebsprofi für B2B-Weiterbildung. Erstelle ein Angebotsschreiben für eine eintägige KI-Grundlagen-Schulung an einen Handwerksbetrieb (15 Mitarbeiter, Bayern). Preis: 1.800€. Ton: professionell, nahbar. Hebe hervor: EU AI Act Kompetenzpflicht, Praxisnähe, ROI. Max. 180 Wörter, mit Betreffzeile."</div>`,
+
+      `<div class="lt"><i class="ti ti-arrows-up"></i>Fortgeschrittene Techniken</div>
+       <div class="tcol">
+         <div class="ic"><strong>Chain-of-Thought (CoT)</strong><span>"Denke laut nach, bevor du antwortest." Verbessert bei komplexen Aufgaben die Qualität erheblich.</span></div>
+         <div class="ic"><strong>System-Prompt</strong><span>Instruktionen die immer gelten – vor dem eigentlichen Gespräch. Definiert Persönlichkeit, Regeln, Format.</span></div>
+         <div class="ic"><strong>ReAct-Prompting</strong><span>Reason + Act: Modell denkt nach → handelt → beobachtet → denkt weiter. Basis für KI-Agenten.</span></div>
+         <div class="ic"><strong>Tree of Thoughts</strong><span>Modell erkundet mehrere Denkpfade parallel. Ideal für komplexe Entscheidungen und Planung.</span></div>
+         <div class="ic"><strong>Negative Anweisungen</strong><span>"Schreibe NICHT..." ist oft wirkungsvoller als nur positive Anweisungen.</span></div>
+         <div class="ic"><strong>Persona + Format Combo</strong><span>"Als CFO-Berater: erstelle eine Executive Summary (5 Bulletpoints, je max. 15 Wörter)."</span></div>
+       </div>
+       <div class="warn-box"><strong>Häufige Fehler:</strong> Zu vage prompten · Alles auf einmal fragen · Keinen Kontext liefern · Den ersten Output ungeprüft übernehmen · Prompt nicht iterieren</div>`,
+
+      `<div class="lt"><i class="ti ti-bookmark"></i>Prompt-Bibliothek für Limevate aufbauen</div>
+       <div class="lc">Eine systematische Sammlung wiederverwendbarer Prompts ist eines der wertvollsten Assets für euer Business.</div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>Vertrieb:</strong> Angebotsschreiben, Cold-Mails, LinkedIn-Nachrichten, Follow-ups</li>
+         <li><span class="snum">2</span><strong>Beratung:</strong> Ist-Analyse, Empfehlungen, Roadmaps, Protokolle</li>
+         <li><span class="snum">3</span><strong>Schulung:</strong> Erklärungen auf verschiedenen Levels, Quiz-Generierung, Lernpläne</li>
+         <li><span class="snum">4</span><strong>Content:</strong> LinkedIn-Posts, Newsletter, Fallstudien, Referenzen</li>
+         <li><span class="snum">5</span><strong>Intern:</strong> Meeting-Vorbereitung, Protokolle, Aufgabenplanung</li>
+       </ul>
+       <div class="callout"><strong>Tipp:</strong> Prompt-Templates können als eigenständiges Produkt verkauft werden: "50 fertige KI-Prompts für Handwerksbetriebe – 299€". Niedrigschwellig und skalierbar.</div>
+       <div class="ex"><div class="el">Bewährtester Limevate-Prompt-Aufbau</div>ROLLE + KONTEXT + AUFGABE + EINSCHRÄNKUNGEN + FORMAT</div>`,
+      null
+    ],
+    quiz: [
+      { q: "Was bewirkt das Zuweisen einer Rolle im Prompt?", opts: ["Nichts Wesentliches", "Das Modell nutzt passenden Kontext und Tonalität aus diesem Fachbereich gezielter", "Das Modell wird langsamer", "Die Antwort wird immer kürzer"], c: 1, e: "Rollen aktivieren domänenspezifisches trainiertes Wissen präziser." },
+      { q: "Was ist 'Few-Shot Prompting'?", opts: ["Einen sehr kurzen Prompt schreiben", "2–5 Beispiele (Eingabe→Ausgabe) mitgeben, damit das Modell das Muster lernt", "Das Modell mit wenigen Tokens betreiben", "Einen Prompt dreimal senden"], c: 1, e: "Few-Shot ist oft effektiver als lange Beschreibungen. Zeigen schlägt Erklären." },
+      { q: "Welche Kombination macht einen professionellen Prompt aus?", opts: ["Nur Aufgabe und Länge", "Nur Rolle und Format", "Rolle + Kontext + Aufgabe + Einschränkungen + Format", "Möglichst viele Details ohne Struktur"], c: 2, e: "Alle 5 Elemente zusammen ergeben konsistent hochwertige Outputs." }
+    ]
+  },
+  {
+    id: 'm3', icon: 'ti-building', title: 'Modul 3 – KI-Strategie im Unternehmen',
+    badge: 'Fortgeschritten', bc: 'bg', time: '75 Min',
+    lessons: ['KI-Reifegrad einschätzen', 'Use Cases identifizieren', 'ROI berechnen', 'Change Management', 'Mini-Quiz'],
+    content: [
+      `<div class="lt"><i class="ti ti-chart-bar"></i>KI-Reifegrad einschätzen</div>
+       <div class="lc">Eure erste Aufgabe bei jedem Kunden: Den KI-Reifegrad einschätzen. Daraus leiten sich alle Empfehlungen ab.</div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>Bewusstsein:</strong> KI-Begriff bekannt, aber kein Einsatz. Aufgabe: Bewusstsein schärfen, erste Use Cases zeigen, Ängste nehmen.</li>
+         <li><span class="snum">2</span><strong>Experimente:</strong> Erste Pilotprojekte, isoliert, keine Strategie. Aufgabe: Skalierung planen, Governance einführen, Erfolge messen.</li>
+         <li><span class="snum">3</span><strong>Integration:</strong> KI in einzelnen Prozessen verankert. Aufgabe: Ausweitung, Schulung aller Mitarbeiter, Datenstrategie.</li>
+         <li><span class="snum">4</span><strong>Transformation:</strong> KI ist Kernstrategie. Aufgabe: Innovation, neue Geschäftsmodelle, Wettbewerbsdifferenzierung.</li>
+       </ul>
+       <div class="callout"><strong>Limevate-Produkt:</strong> Ein 10-Fragen-Selbsttest zum KI-Reifegrad ist euer perfektes Einstiegsangebot. Kostenlos als Lead-Magnet, kostenpflichtig mit ausführlichem Report.</div>`,
+
+      `<div class="lt"><i class="ti ti-target"></i>KI-Use-Cases identifizieren</div>
+       <div class="tcol">
+         <div class="ic"><strong>Ideal für KI</strong><span>Repetitiv + regelbasiert, große Datenmenge, natürliche Sprache, Erstversionen erstellen, 24/7-Verfügbarkeit nötig.</span></div>
+         <div class="ic"><strong>Weniger geeignet</strong><span>Strategische Kernentscheidungen, hochempathische Situationen, physische Tätigkeiten, einmalige Sonderfälle.</span></div>
+       </div>
+       <div class="lt">Branchenspezifische Quick Wins</div>
+       <ul class="steps">
+         <li><span class="snum">→</span><strong>Handwerk:</strong> Angebote, Rechnungen, Kundenkorrespondenz per KI-Vorlage → 70% Zeitersparnis</li>
+         <li><span class="snum">→</span><strong>Recht/Steuer:</strong> Dokumente zusammenfassen, Standardverträge erstellen, Recherche</li>
+         <li><span class="snum">→</span><strong>Handel:</strong> Produktbeschreibungen, Kundensupport-Erstantworten, Bestandsanalyse</li>
+         <li><span class="snum">→</span><strong>HR:</strong> Stellenanzeigen, Bewerbungs-Screening (Achtung: EU AI Act Hochrisiko!), Onboarding</li>
+         <li><span class="snum">→</span><strong>Marketing:</strong> Texterstellung, SEO-Content, Social Media, Marktanalysen</li>
+       </ul>
+       <div class="ex"><div class="el">Praxis: Angebotserstellung Maler</div>Problem: 2h pro Angebot. KI-Lösung: Prompt + Kundendaten = Entwurf in 8 Min, 20 Min Nachbearbeitung. Ergebnis: 1,5h/Angebot gespart × 8 Angebote/Monat = 12h/Monat = 1.500€ Wert bei 125€/h.</div>`,
+
+      `<div class="lt"><i class="ti ti-calculator"></i>ROI berechnen & kommunizieren</div>
+       <div class="callout"><strong>ROI = (Zeitersparnis × Stundenlohn) + Qualitätsgewinn − Implementierungskosten</strong><br><br>ROI% = (Nettogewinn / Investition) × 100</div>
+       <ul class="steps">
+         <li><span class="snum">1</span>Prozess identifizieren: Welche Aufgabe wird automatisiert?</li>
+         <li><span class="snum">2</span>Zeitaufwand messen: Wie viele Stunden pro Woche/Monat?</li>
+         <li><span class="snum">3</span>Stundenwert berechnen: Bruttolohn + 30% Nebenkosten / 160h</li>
+         <li><span class="snum">4</span>Einsparpotenzial schätzen: Realistische 50–80% Zeitersparnis annehmen</li>
+         <li><span class="snum">5</span>Kosten gegenüberstellen: Euer Honorar + Tool-Kosten</li>
+         <li><span class="snum">6</span>Amortisierung zeigen: Ab wann ist der Break-even?</li>
+       </ul>
+       <div class="ex"><div class="el">Beispielrechnung</div>Aufgabe: Monatsbericht erstellen · Aktuell: 6h/Monat · Stundenwert: 80€ · KI-Ersparnis: 4h (67%) · Jährliche Ersparnis: 48h × 80€ = 3.840€ · Limevate-Schulung: 1.800€ · ROI im 1. Jahr: 113%</div>`,
+
+      `<div class="lt"><i class="ti ti-users"></i>Change Management – der menschliche Faktor</div>
+       <ul class="steps">
+         <li><span class="snum">!</span><strong>"KI nimmt mir den Job":</strong> KI ersetzt Aufgaben, nicht Menschen. Wer KI nutzt, wird produktiver und attraktiver für Arbeitgeber.</li>
+         <li><span class="snum">!</span><strong>"Das ist zu kompliziert":</strong> Startet mit dem einfachsten Use Case. Erster Erfolg in 30 Minuten ist möglich.</li>
+         <li><span class="snum">!</span><strong>"Das können wir nicht kontrollieren":</strong> KI-Richtlinie + klare Freigabeprozesse = Kontrolle bleibt beim Menschen.</li>
+         <li><span class="snum">!</span><strong>"Datenschutz ist ungeklärt":</strong> Berechtigte Sorge. DSGVO-konforme Lösung zeigen, AVV erklären.</li>
+       </ul>
+       <div class="callout"><strong>Euer Vorteil:</strong> Ihr seid nicht die anonymen Unternehmensberater. Ihr seid junge Unternehmer, die selbst mit KI arbeiten. Das macht euch authentisch und glaubwürdig.</div>
+       <div class="lt">Das Limevate 4-Schritte-Modell</div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>Sensibilisierung:</strong> Was ist KI? Was kann sie, was nicht?</li>
+         <li><span class="snum">2</span><strong>Befähigung:</strong> Mitarbeiter lernen, KI zu nutzen – euer Kernprodukt.</li>
+         <li><span class="snum">3</span><strong>Integration:</strong> KI in konkrete Arbeitsabläufe einbetten.</li>
+         <li><span class="snum">4</span><strong>Verankerung:</strong> KI-Leitlinien, Erfolgsmessung, kontinuierliches Lernen.</li>
+       </ul>`,
+      null
+    ],
+    quiz: [
+      { q: "Welcher KI-Reifegrad: Pilotprojekte vorhanden, aber keine Strategie?", opts: ["Bewusstsein", "Experimente", "Integration", "Transformation"], c: 1, e: "Reifegrad 2: Erste Tests ohne systematische Einbettung. Aufgabe: Strategie und Skalierung." },
+      { q: "Für welche Aufgaben bringt KI den höchsten ROI?", opts: ["Strategische Kernentscheidungen", "Einmalige kreative Sonderaufgaben", "Repetitive, regelbasierte Prozesse mit großem Datenvolumen", "Hochempathische Kundengespräche"], c: 2, e: "KI skaliert bei Wiederholung. Je häufiger eine Aufgabe, desto größer der ROI." },
+      { q: "Mitarbeiter befürchten Jobverlust durch KI. Was ist sachlich korrekt?", opts: ["Die Angst ist vollständig berechtigt", "KI ersetzt Aufgaben, produktivere Mitarbeiter werden attraktiver", "KI ist komplett harmlos", "Das ist irrelevant"], c: 1, e: "Nuancierte, ehrliche Antwort: Wer KI beherrscht, hat einen Vorteil." }
+    ]
+  },
+  {
+    id: 'm4', icon: 'ti-robot', title: 'Modul 4 – KI-Agenten & Automatisierung',
+    badge: 'Fortgeschritten', bc: 'bg', time: '90 Min',
+    lessons: ['Was sind KI-Agenten?', 'Automatisierungstools', 'RAG & Wissensdatenbanken', 'Praxis-Workflows', 'Mini-Quiz'],
+    content: [
+      `<div class="lt"><i class="ti ti-robot"></i>Was sind KI-Agenten?</div>
+       <div class="lc">Ein KI-Agent ist ein System, das nicht nur auf Anfragen antwortet, sondern selbstständig Ziele verfolgt, Entscheidungen trifft und Werkzeuge nutzt.</div>
+       <div class="tcol">
+         <div class="ic"><strong>LLM (passiv)</strong><span>Antwortet auf eine Frage. Wartet auf nächste Eingabe. Kein Gedächtnis zwischen Gesprächen.</span></div>
+         <div class="ic"><strong>KI-Agent (aktiv)</strong><span>Bekommt ein Ziel. Plant Schritte selbst. Nutzt Tools (Web, APIs, Dateien). Iteriert bis Ziel erreicht.</span></div>
+       </div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>LLM als "Gehirn":</strong> Plant, entscheidet, formuliert</li>
+         <li><span class="snum">2</span><strong>Tools/Werkzeuge:</strong> Web-Suche, Code-Ausführung, API-Calls, Dateioperationen</li>
+         <li><span class="snum">3</span><strong>Gedächtnis:</strong> Kurzzeitig (Kontext), Langzeit (Vektordatenbank)</li>
+         <li><span class="snum">4</span><strong>Handlungsplanung:</strong> Aufgabe → Teilschritte → Ausführen → Prüfen → Anpassen</li>
+       </ul>
+       <div class="callout"><strong>Für Limevate:</strong> Agenten-Setups für Kunden bauen ist ein Premium-Angebot – deutlich höherwertiger als reine Schulungen.</div>`,
+
+      `<div class="lt"><i class="ti ti-tools"></i>Automatisierungstools im Überblick</div>
+       <div class="tcol">
+         <div class="ic"><strong>n8n (Open Source)</strong><span>Visueller Workflow-Builder. Self-hostbar = DSGVO-konform. Hunderte Integrationen. Empfehlung für Kundensetups.</span></div>
+         <div class="ic"><strong>Make (ex-Integromat)</strong><span>Einsteigerfreundlicher, Cloud-basiert. Gut für schnelle Demos. Preis ab 9€/Monat.</span></div>
+         <div class="ic"><strong>Zapier</strong><span>Marktführer, einfachste Bedienung. Teuer bei hohem Volumen.</span></div>
+         <div class="ic"><strong>LangChain / LlamaIndex</strong><span>Python-Frameworks für Agenten. Für technische Setups. Marv sollte das kennen.</span></div>
+         <div class="ic"><strong>Flowise / Botpress</strong><span>No-Code Agenten-Builder auf LangChain-Basis. Ideal für Kundendeployments ohne Coding.</span></div>
+         <div class="ic"><strong>OpenAI Assistants API</strong><span>Einfache Agenten-API von OpenAI. Schnell, gut dokumentiert, für Prototypen ideal.</span></div>
+       </div>
+       <div class="callout"><strong>Empfohlener Limevate-Stack:</strong> Make/n8n + Claude/GPT-4 + Flowise → Damit deckt ihr 90% der Kundenwünsche ab. Kein Programmieren nötig.</div>`,
+
+      `<div class="lt"><i class="ti ti-database"></i>RAG – KI mit eigenem Wissen</div>
+       <div class="lc">RAG (Retrieval-Augmented Generation) kombiniert ein LLM mit einer eigenen Wissensdatenbank. Das Modell sucht erst relevante Dokumente, dann antwortet es damit.</div>
+       <div class="ex"><div class="el">Ohne RAG</div>Kunde fragt KI-Chatbot: "Was sind eure Zahlungsbedingungen?" → KI halluziniert oder sagt "Ich weiß es nicht".</div>
+       <div class="ex"><div class="el">Mit RAG</div>KI durchsucht eigene Dokumente (AGB, FAQ, Preisliste) → findet relevante Stelle → antwortet korrekt mit Quellenangabe.</div>
+       <div class="lt">Anwendungsfälle für Kundenprojekte</div>
+       <ul class="steps">
+         <li><span class="snum">1</span>Interner Wissens-Chatbot: Mitarbeiter fragen Handbücher, Prozesse, Policies</li>
+         <li><span class="snum">2</span>Kunden-Support-Bot: Antwortet aus Produktdokumentation, FAQ</li>
+         <li><span class="snum">3</span>Vertrags-Analysesystem: Verträge hochladen, KI fasst zusammen</li>
+         <li><span class="snum">4</span>Sales-Assistent: Kennt alle Produkte, Preise, Referenzen</li>
+       </ul>
+       <div class="callout"><strong>Tools:</strong> Flowise, LlamaIndex, Langchain (technisch) oder ChatBase, Dify, AnythingLLM (No-Code). Pinecone/Chroma als Vektordatenbank.</div>`,
+
+      `<div class="lt"><i class="ti ti-arrows-exchange"></i>Praxis: Automatisierungs-Workflows</div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>E-Mail-Triager:</strong> Eingehende E-Mails → KI klassifiziert → weiterleiten + Entwurfsantwort erstellen. Tools: n8n + Gmail + Claude.</li>
+         <li><span class="snum">2</span><strong>Meeting-Protokoll-Bot:</strong> Audio → Transkription (Whisper) → KI erstellt Protokoll + Aufgabenliste. Tools: n8n + OpenAI Whisper + Claude.</li>
+         <li><span class="snum">3</span><strong>Angebots-Generator:</strong> Formular-Eingang → KI erstellt Angebotstext → PDF → automatisch versenden. Tools: Make + Claude.</li>
+         <li><span class="snum">4</span><strong>Social-Media-Pipeline:</strong> Blog-Artikel → KI erstellt LinkedIn-Post + Newsletter-Abschnitt. Tool: Make + Claude.</li>
+         <li><span class="snum">5</span><strong>Wettbewerber-Monitor:</strong> Täglich Websites prüfen → KI fasst Änderungen zusammen → Slack-Benachrichtigung. Tools: n8n + Claude.</li>
+       </ul>
+       <div class="callout"><strong>Pricing-Tipp:</strong> Solche Setups: 800–3.000€ einmalig + 100–300€/Monat Wartung. Skalierbar, da nach Aufbau wenig Aufwand.</div>`,
+      null
+    ],
+    quiz: [
+      { q: "Was unterscheidet einen KI-Agenten von einem normalen LLM-Chatbot?", opts: ["Agenten sind schneller", "Agenten verfolgen Ziele selbstständig, planen Schritte und nutzen Tools", "Agenten sind teurer", "Agenten können keine Texte schreiben"], c: 1, e: "Agenten handeln autonom: Ziel bekommen → planen → Tools nutzen → iterieren. Chatbots reagieren nur." },
+      { q: "Wofür steht RAG?", opts: ["Random Answer Generation", "Retrieval-Augmented Generation – KI nutzt eigene Dokumente zum Antworten", "Rapid AI Governance", "Robot Agent Grid"], c: 1, e: "RAG kombiniert Dokumentensuche mit Sprachgenerierung. Eliminiert Halluzination bei unternehmenseigenen Infos." },
+      { q: "Welches Tool eignet sich am besten für DSGVO-konformes Self-Hosting?", opts: ["Zapier", "Make", "n8n", "ChatGPT"], c: 2, e: "n8n ist Open Source und self-hostbar – Daten verlassen nicht den eigenen Server." }
+    ]
+  },
+  {
+    id: 'm5', icon: 'ti-presentation', title: 'Modul 5 – KI-Schulungen verkaufen',
+    badge: 'Business', bc: 'bpu', time: '60 Min',
+    lessons: ['Euer Angebot definieren', 'Zielgruppen & Positionierung', 'Preisgestaltung', 'Akquise & Vertrieb', 'Mini-Quiz'],
+    content: [
+      `<div class="lt"><i class="ti ti-package"></i>Euer Angebotsportfolio</div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>KI-Schnuppertag (Einzelperson):</strong> 3h, online/vor Ort. Grundlagen + erste eigene Prompts. 299–499€.</li>
+         <li><span class="snum">2</span><strong>KI-Grundlagen-Workshop (Team):</strong> 1 Tag, 5–15 Personen. Theorie + Praxis + Branchenuse Cases. 1.500–2.500€.</li>
+         <li><span class="snum">3</span><strong>KI-Strategie-Beratung:</strong> 2–5 Tage, Ist-Analyse + Roadmap + Quick Wins. 3.000–8.000€.</li>
+         <li><span class="snum">4</span><strong>KI-Implementierungsprojekt:</strong> Automatisierungsworkflow aufbauen. 2.000–10.000€ + Wartungsvertrag.</li>
+         <li><span class="snum">5</span><strong>KI-Prompt-Bibliothek:</strong> Branchenspezifische Prompt-Sets. 149–499€ digitales Produkt.</li>
+         <li><span class="snum">6</span><strong>KI-Abo / Retainer:</strong> Monatliche Begleitung, Updates, Fragen. 300–800€/Monat.</li>
+       </ul>
+       <div class="callout"><strong>EU AI Act Pflicht (seit Aug 2025):</strong> Unternehmen MÜSSEN KI-nutzende Mitarbeiter schulen. Das ist euer stärkstes Vertriebsargument!</div>`,
+
+      `<div class="lt"><i class="ti ti-target"></i>Zielgruppen & Positionierung</div>
+       <div class="tcol">
+         <div class="ic"><strong>Handwerk & Bau</strong><span>Große Branche, wenig KI-Erfahrung, viel Potenzial. Lokale Nähe (BW) ist euer Vorteil.</span></div>
+         <div class="ic"><strong>KMU Mittelstand</strong><span>Breite Zielgruppe, klarer ROI-Fokus. Entscheider: Geschäftsführer.</span></div>
+         <div class="ic"><strong>Kommunen & Bildung</strong><span>EU AI Act Schulungspflicht trifft auch den öffentlichen Sektor. Stabile Aufträge.</span></div>
+         <div class="ic"><strong>Freie Berufe</strong><span>Ärzte, Anwälte, Steuerberater: Datenschutz-sensitiv, hoher Zeitspar-Bedarf bei Dokumentation.</span></div>
+       </div>
+       <div class="callout"><strong>Empfehlung für den Start:</strong> Fokus auf regionale KMUs in BW (Rottweil, Stuttgart, Freiburg-Korridor). Netzwerk ist euer größter Hebel am Anfang.</div>`,
+
+      `<div class="lt"><i class="ti ti-coin"></i>Preisgestaltung</div>
+       <ul class="steps">
+         <li><span class="snum">1</span>Tagessatz-Basis: 600–1.200€/Tag pro Person (je nach Erfahrung)</li>
+         <li><span class="snum">2</span>Workshop 1 Tag (3 Personen): 800€ Kosten + 100% Marge = 1.600€ min.</li>
+         <li><span class="snum">3</span>Value-based Pricing: Was ist der Wert für den Kunden? (nicht eure Kosten)</li>
+         <li><span class="snum">4</span>Vergleich: IT-Berater 800–2.000€/Tag, Unternehmensberater 1.500–5.000€/Tag</li>
+       </ul>
+       <div class="ex"><div class="el">Value-based Beispiel</div>Kunde: 20 Mitarbeiter, je 1h/Tag repetitive Aufgaben. Wert KI-Schulung: 20 × 1h × 25€ × 250 Tage = 125.000€/Jahr. Euer Preis: 2.500€ = 2% des Wertes. Problemlos zu rechtfertigen.</div>
+       <div class="warn-box"><strong>Achtung:</strong> Preise nicht nennen vor Bedarfsanalyse! Erst verstehen was der Kunde wirklich braucht, dann maßgeschneidertes Angebot.</div>`,
+
+      `<div class="lt"><i class="ti ti-speakerphone"></i>Akquise & Vertrieb</div>
+       <ul class="steps">
+         <li><span class="snum">1</span><strong>LinkedIn:</strong> Wöchentlich 2–3 Posts über KI-Praxisfälle. "Hier was wir gelernt haben" schlägt "Kauft unsere Schulung".</li>
+         <li><span class="snum">2</span><strong>Netzwerk aktivieren:</strong> Erstes Gratisgespräch (30 Min KI-Check) als Türöffner.</li>
+         <li><span class="snum">3</span><strong>IHK / HWK:</strong> Kooperation für Mitgliedsveranstaltungen. Günstiger Zugang zu KMUs.</li>
+         <li><span class="snum">4</span><strong>Content-Marketing:</strong> Kostenloser Prompt-Guide als Lead-Magnet → Newsletter → Vertrauen.</li>
+         <li><span class="snum">5</span><strong>Referenzen:</strong> Erste 2–3 Kunden zu Sonderkonditionen → Testimonials sammeln. Social Proof ist alles.</li>
+       </ul>
+       <div class="callout"><strong>Wichtigste Erkenntnis:</strong> In den ersten 6 Monaten kommt 80% des Umsatzes über persönliche Kontakte. Investiert in echte Beziehungen.</div>`,
+      null
+    ],
+    quiz: [
+      { q: "Welches Preisprinzip eignet sich am besten für KI-Beratung?", opts: ["Cost-plus (Kosten + kleine Marge)", "Value-based Pricing (Preis = Wert für den Kunden)", "Stundensatz immer unter 50€", "Preise nie kommunizieren"], c: 1, e: "Value-based Pricing erlaubt höhere Preise und erfordert Verständnis des Kundennutzens." },
+      { q: "Welches Argument hat seit August 2025 besonderes Gewicht?", opts: ["KI ist modern und trendy", "EU AI Act Schulungspflicht ist gesetzlich vorgeschrieben", "KI spart immer Geld", "Alle Konkurrenten nutzen KI bereits"], c: 1, e: "Die Kompetenzpflicht des EU AI Act schafft rechtlichen Druck – Unternehmen MÜSSEN schulen." },
+      { q: "Was ist der wichtigste Akquise-Kanal in den ersten 6 Monaten?", opts: ["Google Ads", "Kaltakquise per Telefon", "Persönliches Netzwerk und Empfehlungen", "TV-Werbung"], c: 2, e: "80% des frühen Umsatzes kommt über Beziehungen. Günstiger und effektiver als bezahlte Kanäle." }
+    ]
+  }
+];
+
+const toolsData = [
+  {
+    cat: 'Text-KIs & Chatbots', tools: [
+      { name: 'Claude (Anthropic)', desc: 'Stark in Analyse, Recht und langen Dokumenten. Empfehlung für Beratungsaufgaben. Beste Wahl für Limevate intern.', tags: [['bg', 'Profi'], ['bb', 'Recht']] },
+      { name: 'ChatGPT / GPT-4o', desc: 'Marktführer, multimodal. Stark in Coding und kreativen Aufgaben. Bekanntestes Tool bei Kunden.', tags: [['ba', 'Einsteiger'], ['bb', 'Vielseitig']] },
+      { name: 'Gemini (Google)', desc: 'Gut in Google Workspace integriert. Stark bei Recherche und Google-Docs-Workflows.', tags: [['ba', 'Einsteiger'], ['bb', 'G-Suite']] },
+      { name: 'Perplexity', desc: 'KI-Suchmaschine mit Quellenangaben. Ideal für Recherche, kein Halluzinations-Problem bei Fakten.', tags: [['ba', 'Einsteiger'], ['bb', 'Recherche']] }
+    ]
+  },
+  {
+    cat: 'Automatisierung & Agenten', tools: [
+      { name: 'n8n', desc: 'Open Source Workflow-Automatisierung. Self-hostbar = DSGVO-konform. Empfehlung für Kundenprojekte.', tags: [['bg', 'Fortgeschritten'], ['bte', 'Open Source']] },
+      { name: 'Make (ex-Integromat)', desc: 'Visueller Workflow-Builder, einsteigerfreundlich. Gut für schnelle Demos und einfache Setups.', tags: [['bb', 'Mittelstufe'], [null, null]] },
+      { name: 'Flowise', desc: 'No-Code Agenten-Builder auf LangChain-Basis. Ideal für RAG-Systeme und Chatbots ohne Coding.', tags: [['bg', 'Fortgeschritten'], ['bte', 'No-Code']] },
+      { name: 'Zapier', desc: 'Marktführer Automatisierung. Einfachste Bedienung, größte Integrations-Bibliothek. Für Non-Tech-Kunden.', tags: [['ba', 'Einsteiger'], [null, null]] }
+    ]
+  },
+  {
+    cat: 'Bild & Multimedia KI', tools: [
+      { name: 'Midjourney', desc: 'Bestes Bildgenerierungs-Tool. Für Marketing-Materialien, Präsentationen, Visualisierungen.', tags: [['bb', 'Mittelstufe'], [null, null]] },
+      { name: 'DALL-E 3 (OpenAI)', desc: 'Direkt in ChatGPT integriert. Gut für schnelle Bildgenerierung in Business-Kontext.', tags: [['ba', 'Einsteiger'], [null, null]] },
+      { name: 'ElevenLabs', desc: 'KI-Stimmengenerierung. Für Erklärvideos, Podcasts, Audioguides. Sehr realistische Stimmen.', tags: [['bb', 'Mittelstufe'], [null, null]] },
+      { name: 'HeyGen / Synthesia', desc: 'KI-Video mit Avatar. Schulungsvideos ohne Kameraarbeit. Gut für Kunden-Schulungsprodukte.', tags: [['bg', 'Fortgeschritten'], [null, null]] }
+    ]
+  },
+  {
+    cat: 'Produktivität & Büro', tools: [
+      { name: 'Microsoft Copilot', desc: 'KI direkt in Word, Excel, Outlook, Teams integriert. Für Kunden mit Microsoft 365 der einfachste Einstieg.', tags: [['ba', 'Einsteiger'], ['bb', 'M365']] },
+      { name: 'Notion AI', desc: 'KI in Notion: Texte generieren, zusammenfassen, übersetzen. Ideal für Wissensmanagement.', tags: [['ba', 'Einsteiger'], [null, null]] },
+      { name: 'Gamma', desc: 'KI-Präsentationsersteller. Aus Text wird automatisch eine professionelle Präsentation.', tags: [['ba', 'Einsteiger'], ['bb', 'Präsentationen']] },
+      { name: 'Whisper / Otter.ai', desc: 'KI-Transkription von Meetings und Audio. Basis für Meeting-Protokoll-Automatisierung.', tags: [['bb', 'Mittelstufe'], ['bb', 'Audio']] }
+    ]
+  }
+];
+
+const lawData = [
+  {
+    badge: 'NEU', bc: 'br', title: 'EU AI Act – vollständiger Überblick',
+    blocks: [
+      {
+        t: 'Die 4 Risikostufen', items: [
+          { w: false, txt: 'Inakzeptables Risiko (VERBOTEN): Social Scoring durch Behörden, unterschwellige Manipulation, biometrische Echtzeit-Überwachung, Ausnutzung von Schwachstellen' },
+          { w: false, txt: 'Hohes Risiko: KI in kritischer Infrastruktur, Bildung, HR, Kreditvergabe, Strafverfolgung → Konformitätsbewertung + Dokumentation + menschliche Aufsicht PFLICHT' },
+          { w: false, txt: 'Begrenztes Risiko: Chatbots, Deepfakes → Transparenzpflicht: Nutzer müssen wissen, dass sie mit KI interagieren' },
+          { w: false, txt: 'Minimales Risiko: Spamfilter, KI in Videospielen → Keine Sonderpflichten, freiwilliger Kodex empfohlen' }
+        ]
+      },
+      {
+        t: 'Zeitplan – kritische Fristen', items: [
+          { w: true, txt: 'Feb 2025: Verbote für inakzeptables Risiko sind in Kraft' },
+          { w: true, txt: 'Aug 2025: KI-Kompetenzpflicht – Mitarbeiter die KI nutzen MÜSSEN ausreichend geschult sein. EUER BESTES VERKAUFSARGUMENT!' },
+          { w: true, txt: 'Aug 2026: Hochrisiko-Bestimmungen vollständig anwendbar. Konformitätsbewertungen müssen vorliegen' },
+          { w: true, txt: 'Jan 2027: GPAI-Regeln (General Purpose AI wie GPT, Claude) vollständig anwendbar' }
+        ]
+      },
+      {
+        t: 'Pflichten als Berater / Nutzer', items: [
+          { w: false, txt: 'Als "Deployer" (ihr nutzt KI für/beim Kunden): Risikoklasse prüfen, Mitarbeiter schulen, technische Dokumentation' },
+          { w: false, txt: 'Als "Provider" (ihr bietet KI-gestütztes Tool an): Weitergehende Pflichten, Konformitätsprüfung' },
+          { w: false, txt: 'Empfehlung: In Beratungsverträgen klarstellen, welche Rolle ihr einnehmt und Haftung entsprechend regeln' }
+        ]
+      }
+    ]
+  },
+  {
+    badge: 'DSGVO', bc: 'bb', title: 'DSGVO – Datenschutz beim KI-Einsatz',
+    blocks: [
+      {
+        t: 'Grundregeln', items: [
+          { w: false, txt: 'Personenbezogene Daten niemals ohne Rechtsgrundlage in externe KI-Dienste eingeben' },
+          { w: false, txt: 'Auftragsverarbeitungsvertrag (AVV) mit jedem KI-Anbieter Pflicht, wenn Kundendaten verarbeitet werden' },
+          { w: false, txt: 'Zweckbindung: Daten dürfen nur für den angegebenen Zweck genutzt werden' },
+          { w: false, txt: 'Datensparsamkeit: Nur so viele Daten wie nötig an KI übergeben – Anonymisierung wo möglich' }
+        ]
+      },
+      {
+        t: 'Besonderheiten KI', items: [
+          { w: true, txt: 'Automatisierte Einzelentscheidungen (Art. 22 DSGVO): KI-Entscheidungen ohne Menschenbeteiligung sind eingeschränkt' },
+          { w: true, txt: 'Datenschutz-Folgenabschätzung (DSFA) bei hochriskanter Verarbeitung, z.B. KI-gestützte Mitarbeiterüberwachung' },
+          { w: false, txt: 'Betroffenenrechte (Auskunft, Löschung, Widerspruch) gelten auch für KI-verarbeitete Daten' },
+          { w: false, txt: 'Empfehlung: EU-Server bevorzugen (Azure EU West, AWS Frankfurt) für datenschutzkritische Workloads' }
+        ]
+      },
+      {
+        t: 'Praktisch für Limevate', items: [
+          { w: false, txt: 'Schulungsunterlagen: Keine echten Kundendaten in Beispielen – immer anonymisiert oder fiktiv' },
+          { w: false, txt: 'Eigene Website: Datenschutzerklärung mit Erwähnung genutzter KI-Tools als Auftragsverarbeiter' },
+          { w: false, txt: 'Bei Kundenprojekten: AVV-Vorlage bereithalten, Datenfluss dokumentieren, DSFA-Checkliste als Service anbieten' }
+        ]
+      }
+    ]
+  },
+  {
+    badge: 'Haftung', bc: 'ba', title: 'Haftung & Urheberrecht',
+    blocks: [
+      {
+        t: 'Haftung als KI-Berater', items: [
+          { w: true, txt: 'Ihr haftet für eure Beratungsempfehlungen – auch wenn diese KI-gestützt sind. "Die KI hat das gesagt" ist rechtlich keine Entschuldigung.' },
+          { w: true, txt: 'Neue EU KI-Haftungsrichtlinie (in Entwicklung): Erleichterte Beweislast für Geschädigte bei hochriskanter KI' },
+          { w: false, txt: 'AGB mit klarem Haftungsausschluss für KI-generierte Inhalte formulieren lassen' },
+          { w: false, txt: 'Berufshaftpflichtversicherung für IT/Beratungsleistungen abschließen – ca. 600–1.500€/Jahr für Startups' }
+        ]
+      },
+      {
+        t: 'Urheberrecht bei KI-Outputs', items: [
+          { w: false, txt: 'KI-generierte Werke sind in Deutschland nicht automatisch urheberrechtlich geschützt – kein menschlicher Schöpfer = kein Schutz' },
+          { w: true, txt: 'KI kann urheberrechtlich geschütztes Material aus Training reproduzieren – Risiko bei 1:1-Übernahme ohne Bearbeitung' },
+          { w: false, txt: 'Empfehlung: KI-Outputs immer signifikant bearbeiten, eigene kreative Leistung einbringen' },
+          { w: false, txt: 'Für Schulungsmaterialien: Im Gesellschaftsvertrag klären, wer geistiges Eigentum an gemeinsam erstellten Inhalten hält' }
+        ]
+      }
+    ]
+  },
+  {
+    badge: 'Gründung', bc: 'bg', title: 'Gewerbeanmeldung & Rechtsstruktur',
+    blocks: [
+      {
+        t: 'Rechtsformvergleich für Limevate', items: [
+          { w: true, txt: 'GbR: Sofort, kein Kapital nötig, ABER: alle drei Gründer haften persönlich und unbegrenzt mit Privatvermögen. Für professionelle Kundenarbeit nicht empfohlen.' },
+          { w: false, txt: 'UG (haftungsbeschränkt): Ab 1€, Haftungsbeschränkung, günstig in der Gründung (~500–1.500€). Muss 25% Gewinn als Rücklage einbehalten.' },
+          { w: false, txt: 'GmbH: 25.000€ Stammkapital (mind. 12.500€ bei Gründung). Beste Außenwirkung, volle Haftungsbeschränkung.' },
+          { w: false, txt: 'Empfehlung: UG jetzt gründen, nach 2–3 Jahren zu GmbH umwandeln wenn Kapitalbasis vorhanden.' }
+        ]
+      },
+      {
+        t: 'Wichtige Gründungs-Schritte', items: [
+          { w: false, txt: 'Gesellschaftsvertrag: Aufgaben, Gewinnverteilung, Entscheidungsprozesse, Ausstiegsszenarien – VOR Gründung festlegen!' },
+          { w: false, txt: 'Gewerbeanmeldung beim Gewerbeamt der Gemeinde (~20–60€). KI-Beratung = Gewerbe, kein freier Beruf.' },
+          { w: false, txt: 'Steuerliche Anmeldung beim Finanzamt: Umsatzsteuer-Voranmeldung, ggf. Kleinunternehmer (bis 22.000€/Jahr)' },
+          { w: true, txt: 'Bildungsleistungen können MwSt-befreit sein (§4 Nr. 21 UStG) – aber nur bei anerkanntem Bildungsanbieter. Steuerberater fragen!' },
+          { w: false, txt: 'Website-Pflichten: Impressum, AGB, Datenschutzerklärung vor dem ersten Kundenauftrag – sonst Abmahnrisiko' }
+        ]
+      }
+    ]
+  }
+];
+
+const allQ = [
+  { l: 'einsteiger', q: "Was unterscheidet Machine Learning von klassischer Programmierung?", opts: ["ML braucht mehr Entwickler", "ML lernt Regeln aus Daten statt sie explizit zu programmieren", "ML ist immer genauer", "ML braucht kein Internet"], c: 1, e: "Klassisch: Regeln werden programmiert. ML: Regeln werden aus Daten gelernt." },
+  { l: 'einsteiger', q: "Was bedeutet 'Halluzination' bei einem KI-Modell?", opts: ["Das Modell ist überhitzt", "Das Modell erfindet plausibel klingende, falsche Informationen", "Das Modell ist kreativ", "Das Modell antwortet zu langsam"], c: 1, e: "LLMs basieren auf Wahrscheinlichkeit. Sie können selbstsicher falsche Fakten produzieren. Immer prüfen!" },
+  { l: 'einsteiger', q: "Was ist ein Token im Kontext von LLMs?", opts: ["Eine Währung für KI-Dienste", "Ein Zugriffsschlüssel", "Ein Textstück (~¾ Wort), das das Modell verarbeitet", "Ein Trainingsparameter"], c: 2, e: "Modelle verarbeiten Text als Token-Sequenzen. 1.000 Wörter ≈ 1.300 Token." },
+  { l: 'mittel', q: "Was ist 'Few-Shot Prompting'?", opts: ["Einen kurzen Prompt schreiben", "2–5 Beispiele (Eingabe→Ausgabe) mitgeben, damit das Modell das Muster übernimmt", "Das Modell kurz nutzen", "Einen Prompt wiederholen"], c: 1, e: "Few-Shot ist oft wirksamer als lange Beschreibungen. Zeigen schlägt Erklären." },
+  { l: 'mittel', q: "Wofür steht RAG?", opts: ["Random Answer Generation", "Retrieval-Augmented Generation – KI nutzt eigene Dokumente", "Rapid AI Guidance", "Robot Agent Grid"], c: 1, e: "RAG kombiniert Dokumentensuche mit Sprachgenerierung. Eliminiert Halluzination bei unternehmenseigenen Infos." },
+  { l: 'mittel', q: "Was macht n8n besonders attraktiv für Kundenprojekte?", opts: ["Es ist das teuerste Tool", "Es ist Open Source und self-hostbar – DSGVO-konform", "Es hat die meisten User", "Es braucht Programmierkenntnisse"], c: 1, e: "Self-Hosting = Daten bleiben auf eigenem Server. Entscheidend für DSGVO-Compliance." },
+  { l: 'profi', q: "Was regelt der EU AI Act für 'hochriskante KI'?", opts: ["Sie sind verboten", "Konformitätsbewertung, Dokumentation und menschliche Aufsicht sind Pflicht", "Nur staatliche Stellen dürfen sie nutzen", "Sie brauchen eine staatliche Lizenz"], c: 1, e: "Hochriskante KI muss bewertet, dokumentiert und beaufsichtigt werden." },
+  { l: 'profi', q: "Worin unterscheidet sich ein KI-Agent von einem einfachen Chatbot?", opts: ["Agenten sind teurer", "Agenten verfolgen Ziele selbstständig, planen Schritte und nutzen Tools", "Agenten sind schneller", "Agenten können nur Text lesen"], c: 1, e: "Agenten handeln autonom: Ziel bekommen → planen → Tools nutzen → iterieren bis fertig." },
+  { l: 'recht', q: "Ab wann gilt die KI-Schulungspflicht des EU AI Act?", opts: ["Januar 2024", "August 2025", "Januar 2026", "August 2027"], c: 1, e: "Seit August 2025 müssen Unternehmen sicherstellen, dass KI-nutzende Mitarbeiter ausreichend geschult sind." },
+  { l: 'recht', q: "Was ist bei der Nutzung von ChatGPT mit Kundendaten DSGVO-rechtlich nötig?", opts: ["Nichts Besonderes", "Auftragsverarbeitungsvertrag (AVV) mit OpenAI und DSGVO-Prüfung", "Schriftliche Genehmigung aller Kunden", "Registrierung beim Datenschutzbeauftragten"], c: 1, e: "Personenbezogene Daten → Drittanbieter = Auftragsverarbeitung. AVV ist Pflicht." },
+  { l: 'recht', q: "Welche Rechtsform schützt die drei Limevate-Gründer vor persönlicher Haftung?", opts: ["GbR", "Einzelunternehmen", "UG oder GmbH", "Freiberufliche Tätigkeit"], c: 2, e: "GbR: alle haften persönlich. UG/GmbH: Haftung auf Gesellschaftsvermögen beschränkt." },
+  { l: 'business', q: "Was ist Value-based Pricing?", opts: ["Preis = eigene Kosten + Marge", "Preis basiert auf dem Wert, den der Kunde erhält", "Preis richtet sich nach Konkurrenz", "Möglichst niedrig für maximale Abschlüsse"], c: 1, e: "Value-based Pricing orientiert sich am Kundennutzen – erlaubt höhere Preise bei klar kommuniziertem ROI." },
+  { l: 'business', q: "Welches Limevate-Produkt eignet sich am besten als digitaler Skalierungs-Hebel?", opts: ["Persönliche Coaching-Stunden", "Branchenspezifische Prompt-Bibliothek als digitales Produkt", "Vor-Ort-Workshops", "Telefon-Hotline"], c: 1, e: "Digitale Produkte (Prompt-Sets, Guides) sind einmal erstellt und beliebig oft verkaufbar." }
+];
+
+/* ============================================================
+   Limevate KI-Akademie – App Logic
+   ============================================================ */
+
+/* ── Helpers ─────────────────────────────────────────────── */
+function openClaude(query) {
+  window.open('https://claude.ai/new?q=' + encodeURIComponent(query), '_blank');
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+/* ── Team / Profiles ─────────────────────────────────────── */
+function selProf(el, who) {
+  document.querySelectorAll('.pc').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  const p = profiles[who];
+  document.getElementById('prof-info').innerHTML = `
+    <div class="prof-box">
+      <div class="prof-box-title">${p.name}</div>
+      <div class="prof-box-text">${p.focus}</div>
+      <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Nächste 3 Schritte</div>
+      ${p.next.map((n, i) => `
+        <div class="next-step">
+          <span class="next-num">${i + 1}</span>${n}
+        </div>`).join('')}
+    </div>`;
+}
+
+/* ── Modules ─────────────────────────────────────────────── */
+const mAnswered = {};
+
+function renderMods() {
+  const ml = document.getElementById('mlist');
+  ml.innerHTML = modules.map(m => `
+    <div class="mitem">
+      <div class="mhdr" onclick="toggleMod('${m.id}')">
+        <i class="ti ${m.icon} micon"></i>
+        <span class="mtitle">${m.title}</span>
+        <div class="mmeta">
+          <span class="badge ${m.bc}">${m.badge}</span>
+          <span class="mtime">${m.time}</span>
+        </div>
+        <i class="ti ti-chevron-down mchev" id="mchev-${m.id}"></i>
+      </div>
+      <div class="mbody" id="mbody-${m.id}">
+        <div class="lnav" id="lnav-${m.id}">
+          ${m.lessons.map((l, li) => `
+            <button class="lb${li === 0 ? ' active' : ''}" onclick="showLesson('${m.id}',${li},this)">${l}</button>`).join('')}
+        </div>
+        <div id="lc-${m.id}"></div>
+        <button class="cta mt-1" onclick="openClaude('Ich lerne ${m.title} – stelle mir 5 vertiefende Fragen und erkläre die Antworten ausführlich auf Deutsch')">
+          <i class="ti ti-messages"></i> Tiefer lernen – interaktiv mit Claude
+        </button>
+      </div>
+    </div>`).join('');
+
+  // pre-render first lesson of each module
+  modules.forEach(m => showLesson(m.id, 0, null));
+}
+
+function toggleMod(id) {
+  const body = document.getElementById('mbody-' + id);
+  const chev = document.getElementById('mchev-' + id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chev.classList.toggle('open', !isOpen);
+}
+
+function showLesson(mid, li, btn) {
+  const m = modules.find(x => x.id === mid);
+  if (!m) return;
+  if (btn) {
+    document.querySelectorAll(`#lnav-${mid} .lb`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const lc = document.getElementById('lc-' + mid);
+  if (!lc) return;
+
+  const isQuiz = li === m.lessons.length - 1;
+  if (isQuiz) {
+    lc.innerHTML = `<div class="qwrap" id="mq-${mid}"></div>`;
+    const qw = document.getElementById('mq-' + mid);
+    if (qw) {
+      qw.innerHTML = m.quiz.map((q, qi) => `
+        <div class="qcard">
+          <div class="qtext">${qi + 1}. ${q.q}</div>
+          <div class="qopts">
+            ${q.opts.map((o, oi) => `
+              <button class="qopt" onclick="answerMQ('${mid}',${qi},${oi},${q.c},'${q.e.replace(/'/g, "\'")}',this)">${o}</button>`).join('')}
+          </div>
+          <div class="qfb" id="mqfb-${mid}-${qi}"></div>
+        </div>`).join('');
+    }
+  } else {
+    lc.innerHTML = m.content[li] || '';
+  }
+}
+
+function answerMQ(mid, qi, chosen, correct, explain, btn) {
+  const key = mid + '-' + qi;
+  if (mAnswered[key]) return;
+  mAnswered[key] = true;
+  const card = btn.closest('.qcard');
+  card.querySelectorAll('.qopt').forEach((o, i) => {
+    o.disabled = true;
+    if (i === correct) o.classList.add('ok');
+  });
+  if (chosen !== correct) btn.classList.add('no');
+  const fb = document.getElementById('mqfb-' + mid + '-' + qi);
+  fb.className = 'qfb show ' + (chosen === correct ? 'ok' : 'no');
+  fb.innerHTML = (chosen === correct ? '✓ Richtig! ' : '✗ Falsch. ') + explain;
+}
+
+/* ── Tools ───────────────────────────────────────────────── */
+function renderTools() {
+  const tc = document.getElementById('tools-content');
+  tc.innerHTML = toolsData.map(cat => `
+    <div style="margin-bottom:1.25rem">
+      <div class="slbl">${cat.cat}</div>
+      <div class="tools-grid">
+        ${cat.tools.map(t => `
+          <div class="tool-card">
+            <div class="tool-name">${t.name}</div>
+            <div class="tool-desc">${t.desc}</div>
+            <div class="tool-tags">
+              ${t.tags.filter(tag => tag[0]).map(tag => `<span class="badge ${tag[0]}">${tag[1]}</span>`).join('')}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  tc.innerHTML += `
+    <button class="cta" onclick="openClaude('30-Tage KI-Tool-Lernplan Limevate Team praktische Übungsaufgaben für jeden')">
+      <i class="ti ti-player-play"></i> 30-Tage Tool-Lernplan erstellen
+    </button>`;
+}
+
+/* ── Law ─────────────────────────────────────────────────── */
+function renderLaw() {
+  const lc = document.getElementById('law-content');
+  lc.innerHTML = lawData.map((l, li) => `
+    <div class="lcard">
+      <div class="lchdr" onclick="toggleLaw(${li})">
+        <span class="badge ${l.bc}">${l.badge}</span>
+        <span class="lchdr-title">${l.title}</span>
+        <i class="ti ti-chevron-down lchev" id="lchev-${li}"></i>
+      </div>
+      <div class="lcbody" id="lcbody-${li}">
+        ${l.blocks.map(b => `
+          <div style="margin-bottom:.875rem">
+            <div class="lb-title">${b.t}</div>
+            ${b.items.map(it => `
+              <div class="${it.w ? 'lw' : 'li'}">
+                <i class="ti ${it.w ? 'ti-alert-triangle' : 'ti-check'}"></i>${it.txt}
+              </div>`).join('')}
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function toggleLaw(li) {
+  const body = document.getElementById('lcbody-' + li);
+  const chev = document.getElementById('lchev-' + li);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chev.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+/* ── Quiz ────────────────────────────────────────────────── */
+let currentQL = 'alle';
+const gAnswered = {};
+
+function loadQ(level, btn) {
+  currentQL = level;
+  document.querySelectorAll('#quiz-filters .lb').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const levelLabel = { einsteiger: 'Einst.', mittel: 'Mittel', profi: 'Profi', recht: 'Recht', business: 'Business' };
+  const levelClass = { einsteiger: 'ba', mittel: 'bb', profi: 'bg', recht: 'br', business: 'bpu' };
+  const qs = level === 'alle' ? allQ : allQ.filter(q => q.l === level);
+
+  document.getElementById('quiz-content').innerHTML = qs.map((q, i) => `
+    <div class="qcard">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:.625rem">
+        <div class="qtext" style="margin-bottom:0">${i + 1}. ${q.q}</div>
+        <span class="badge ${levelClass[q.l] || 'bb'}" style="flex-shrink:0">${levelLabel[q.l] || q.l}</span>
+      </div>
+      <div class="qopts">
+        ${q.opts.map((o, oi) => `
+          <button class="qopt" onclick="answerGQ(${i},${oi},${q.c},'${q.e.replace(/'/g, "\'")}',this)">${o}</button>`).join('')}
+      </div>
+      <div class="qfb" id="gfb-${i}"></div>
+    </div>`).join('');
+}
+
+function answerGQ(qi, chosen, correct, explain, btn) {
+  if (gAnswered['g' + qi]) return;
+  gAnswered['g' + qi] = true;
+  const card = btn.closest('.qcard');
+  card.querySelectorAll('.qopt').forEach((o, i) => {
+    o.disabled = true;
+    if (i === correct) o.classList.add('ok');
+  });
+  if (chosen !== correct) btn.classList.add('no');
+  const fb = document.getElementById('gfb-' + qi);
+  fb.className = 'qfb show ' + (chosen === correct ? 'ok' : 'no');
+  fb.innerHTML = (chosen === correct ? '✓ Richtig! ' : '✗ Falsch. ') + explain;
+}
+
+/* ── Init ────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  selProf(document.querySelector('.pc'), 'josh');
+  renderMods();
+  renderTools();
+  renderLaw();
+  loadQ('alle', document.querySelector('#quiz-filters .lb'));
+});
+  </script>
 </body>
 </html>
