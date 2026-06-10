@@ -295,15 +295,109 @@ body {
   .tools-grid { grid-template-columns: 1fr; }
   .row { flex-direction: column; }
 }
+
+/* ── Login ───────────────────────────────────────────────── */
+#login-screen {
+  position: fixed; inset: 0;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999; padding: 1rem;
+}
+.login-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  width: 100%; max-width: 360px;
+}
+.login-logo {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px; margin: 0 auto 1rem;
+}
+.login-box h2 {
+  font-size: 18px; font-weight: 700; color: var(--text);
+  text-align: center; margin-bottom: .25rem;
+}
+.login-box p {
+  font-size: 13px; color: var(--text3);
+  text-align: center; margin-bottom: 1.5rem;
+}
+.login-field { margin-bottom: 1rem; }
+.login-field label {
+  display: block; font-size: 12px; font-weight: 600;
+  color: var(--text2); margin-bottom: 5px;
+}
+.login-field input {
+  width: 100%; padding: 10px 12px;
+  border: 1px solid var(--border2); border-radius: var(--radius);
+  background: var(--bg2); color: var(--text);
+  font-size: 14px; outline: none;
+  transition: border-color .15s;
+}
+.login-field input:focus { border-color: var(--green); }
+.login-btn {
+  width: 100%; padding: 11px;
+  background: var(--green); color: #fff;
+  border: none; border-radius: var(--radius);
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  margin-top: .25rem; transition: opacity .15s;
+}
+.login-btn:hover { opacity: .88; }
+.login-error {
+  display: none; font-size: 12px; color: var(--red-dark);
+  background: var(--red-light); border-radius: var(--radius);
+  padding: 8px 12px; margin-top: .75rem; text-align: center;
+}
+.login-error.show { display: block; }
+.login-user-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 8px 12px;
+  font-size: 13px; color: var(--text2); margin-top: .5rem;
+}
+.login-user-badge i { color: var(--green); }
+.logout-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: transparent; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 6px 12px;
+  font-size: 12px; color: var(--text3); cursor: pointer;
+  margin-left: auto; transition: all .15s;
+}
+.logout-btn:hover { border-color: var(--red-dark); color: var(--red-dark); }
   </style>
 </head>
 <body>
+  <!-- Login Screen -->
+  <div id="login-screen">
+    <div class="login-box">
+      <div class="login-logo">LV</div>
+      <h2>Limevate KI-Akademie</h2>
+      <p>Bitte melde dich an um fortzufahren</p>
+      <div class="login-field">
+        <label>Benutzername</label>
+        <input type="text" id="login-user" placeholder="z.B. Josh" autocomplete="username" />
+      </div>
+      <div class="login-field">
+        <label>Passwort</label>
+        <input type="password" id="login-pass" placeholder="••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" />
+      </div>
+      <button class="login-btn" onclick="doLogin()">Anmelden</button>
+      <div class="login-error" id="login-error">Benutzername oder Passwort falsch.</div>
+    </div>
+  </div>
+
   <div class="app">
     <div class="hdr">
       <div class="hdr-logo">LV</div>
-      <div>
+      <div style="flex:1">
         <h1>Limevate KI-Akademie</h1>
         <p>Josh · Marv · Co-Chef — alle drei gleichberechtigte Chefs</p>
+      </div>
+      <div id="hdr-user" style="display:none;align-items:center;gap:8px;flex-shrink:0">
+        <span style="font-size:12px;color:var(--text3)" id="hdr-username"></span>
+        <button class="logout-btn" onclick="doLogout()"><i class="ti ti-logout"></i> Abmelden</button>
       </div>
     </div>
 
@@ -1095,6 +1189,46 @@ function answerGQ(qi, chosen, correct, explain, btn) {
   const fb = document.getElementById('gfb-' + qi);
   fb.className = 'qfb show ' + (chosen === correct ? 'ok' : 'no');
   fb.innerHTML = (chosen === correct ? '✓ Richtig! ' : '✗ Falsch. ') + explain;
+}
+
+/* ── Login ───────────────────────────────────────────────── */
+const USERS = {
+  josh:  '1234',
+  marv:  '1234',
+  marci: '1234'
+};
+
+function doLogin() {
+  const user = document.getElementById('login-user').value.trim().toLowerCase();
+  const pass = document.getElementById('login-pass').value;
+  const err  = document.getElementById('login-error');
+
+  if (USERS[user] && USERS[user] === pass) {
+    err.classList.remove('show');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('hdr-user').style.display = 'flex';
+    const displayName = user.charAt(0).toUpperCase() + user.slice(1);
+    document.getElementById('hdr-username').textContent = '👤 ' + displayName;
+
+    // pre-select matching profile if it exists
+    const profMap = { josh: 'josh', marv: 'marv', marci: 'cc' };
+    const profKey = profMap[user] || 'josh';
+    const cards = document.querySelectorAll('.pc');
+    const idx = profKey === 'josh' ? 0 : profKey === 'marv' ? 1 : 2;
+    if (cards[idx]) selProf(cards[idx], profKey);
+  } else {
+    err.classList.add('show');
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-pass').focus();
+  }
+}
+
+function doLogout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('hdr-user').style.display = 'none';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-error').classList.remove('show');
 }
 
 /* ── Init ────────────────────────────────────────────────── */
