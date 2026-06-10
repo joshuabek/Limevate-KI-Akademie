@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Limevate KI-Akademie</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="hdr">
+      <div class="hdr-logo">LV</div>
+      <div>
+        <h1>Limevate KI-Akademie</h1>
+        <p>Josh · Marv · Co-Chef — alle drei gleichberechtigte Chefs</p>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('team',this)"><i class="ti ti-users"></i> Team</button>
+      <button class="tab" onclick="switchTab('learn',this)"><i class="ti ti-school"></i> Module</button>
+      <button class="tab" onclick="switchTab('tools',this)"><i class="ti ti-tools"></i> KI-Tools</button>
+      <button class="tab" onclick="switchTab('law',this)"><i class="ti ti-gavel"></i> Recht</button>
+      <button class="tab" onclick="switchTab('quiz',this)"><i class="ti ti-bulb"></i> Quiz</button>
+    </div>
+
+    <!-- TEAM -->
+    <div id="tab-team" class="view active">
+      <div class="slbl">Wähle dein Profil</div>
+      <div class="profiles">
+        <div class="pc sel" onclick="selProf(this,'josh')">
+          <div class="av avg">JO</div>
+          <div class="pn">Josh</div>
+          <div class="pr">Digitalisierungsmanager BZKI</div>
+          <span class="badge bg">Fortgeschritten</span>
+          <div class="pbar"><div class="pfg" style="width:72%"></div></div>
+        </div>
+        <div class="pc" onclick="selProf(this,'marv')">
+          <div class="av avb">MV</div>
+          <div class="pn">Marv</div>
+          <div class="pr">KI-Kompetenz Zertifikat</div>
+          <span class="badge bb">Mittelstufe</span>
+          <div class="pbar"><div class="pfb" style="width:55%"></div></div>
+        </div>
+        <div class="pc" onclick="selProf(this,'cc')">
+          <div class="av ava">C3</div>
+          <div class="pn">Co-Chef</div>
+          <div class="pr">Quereinsteiger – volles Potential</div>
+          <span class="badge ba">Einsteiger</span>
+          <div class="pbar"><div class="pfa" style="width:12%"></div></div>
+        </div>
+      </div>
+      <div id="prof-info"></div>
+      <div class="row mt-1">
+        <button class="cta" onclick="openClaude('4-Wochen-Lernplan Limevate Team Josh Marv Co-Chef KI-Management')">
+          <i class="ti ti-calendar"></i> 4-Wochen-Lernplan erstellen
+        </button>
+        <button class="cta2" onclick="openClaude('Limevate KI-Management Dienstleistungen Angebote Startup Deutschland')">
+          <i class="ti ti-briefcase"></i> Limevate-Angebote entwickeln
+        </button>
+      </div>
+    </div>
+
+    <!-- MODULE -->
+    <div id="tab-learn" class="view">
+      <div class="slbl">Alle Lernmodule — klicke zum Öffnen</div>
+      <div class="mlist" id="mlist"></div>
+    </div>
+
+    <!-- KI-TOOLS -->
+    <div id="tab-tools" class="view">
+      <div class="slbl">KI-Tools — was ihr kennen und empfehlen müsst</div>
+      <div id="tools-content"></div>
+    </div>
+
+    <!-- RECHT -->
+    <div id="tab-law" class="view">
+      <div class="slbl">Rechtsgrundlagen — Pflichtlektüre für KI-Berater in Deutschland</div>
+      <div id="law-content"></div>
+      <button class="cta mt-1" onclick="openClaude('Limevate Rechtscheckliste Gründung EU AI Act DSGVO Haftung Verträge Deutschland')">
+        <i class="ti ti-checklist"></i> Vollständige Rechtscheckliste für Limevate
+      </button>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="tab-quiz" class="view">
+      <div class="slbl">Wissenstest</div>
+      <div style="display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap" id="quiz-filters">
+        <button class="lb active" onclick="loadQ('alle',this)">Alle</button>
+        <button class="lb" onclick="loadQ('einsteiger',this)">Einsteiger</button>
+        <button class="lb" onclick="loadQ('mittel',this)">Mittelstufe</button>
+        <button class="lb" onclick="loadQ('profi',this)">Fortgeschritten</button>
+        <button class="lb" onclick="loadQ('recht',this)">Recht</button>
+        <button class="lb" onclick="loadQ('business',this)">Business</button>
+      </div>
+      <div id="quiz-content" class="qwrap"></div>
+      <div class="row mt-1">
+        <button class="cta2" onclick="loadQ(currentQL, document.querySelector('#quiz-filters .lb.active'))">
+          <i class="ti ti-refresh"></i> Neu laden
+        </button>
+        <button class="cta" onclick="openClaude('20 KI-Quiz-Fragen Limevate Team Einsteiger Mittelstufe Fortgeschritten Recht Business mit Erklärungen')">
+          <i class="ti ti-list"></i> Mehr Fragen generieren
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/data.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
